@@ -11,7 +11,7 @@ exports.ref = (x) => {
     'evilbot', 
     '2180560548837849', 
     [
-      PostbackButton('Custom callback 1','CALLBACK_1'), 
+      PostbackButton('Callback','CALLBACK_1'), 
     ]
   );
   
@@ -19,11 +19,9 @@ exports.ref = (x) => {
     x.user_id, 
     [
       _tile,
-      _tile,
-      _tile,
     ],
     null,
-    (body)=>con
+    (body, response)=>console.log(response)
   );
   
 };
