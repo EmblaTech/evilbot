@@ -5,6 +5,7 @@ const send_attachment = require('./evil/send_attachment').ref;
 
 const example_send_tile = require('./send_example_tile').ref;
 const example_send_tile_2 = require('./send_example_tile_2').ref;
+const example_send_tile_3 = require('./send_example_tile_3').ref;
 
 const url_banner = 'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2Fsixteen.png?1517748298720';
 
@@ -19,6 +20,8 @@ evil({
           example_send_tile(x);
         } else if (x.message=='list') {
           example_send_tile_2(x);
+        } else if (x.message=='media') {
+          example_send_tile_3(x);
         }
       });
     },
