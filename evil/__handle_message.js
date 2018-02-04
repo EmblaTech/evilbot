@@ -32,7 +32,7 @@ exports.ref = function (event, flow) {
   } else if (messageAttachments) {
     if (flow.on_attachment)
       flow.on_attachment({
-        attachment: {}, // ?
+        attachment: messageAttachments, // ?
         user_id: senderID,
         _message: message,
       });
@@ -40,7 +40,6 @@ exports.ref = function (event, flow) {
   } else {
     if (flow.on_other)
       flow.on_other({
-        data: {}, // ?
         user_id: senderID,
         _message: message,
       });

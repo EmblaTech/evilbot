@@ -1,5 +1,5 @@
-exports.ref = function (app) {
-  app.get('/webhook', function(req, res) {
+exports.ref = function (app, hookname) {
+  app.get('/'+hookname, function(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {
       console.log("Validating webhook");

@@ -3,6 +3,7 @@ exports.ref = function(options) {
   var flow = options.flow || {};
   var static_path = static_path || __dirname + '/views/index.html';
   var port = port || process.env.PORT || 3000;
+  var hookname = options.hookname;
       
   // Express
   
@@ -30,8 +31,8 @@ exports.ref = function(options) {
   const registerWebhook = require('./__webhook_register').ref;
   const listenToWebhook = require('./__webhook_listener').ref;
   
-  registerWebhook(app,);
-  listenToWebhook(app, flow);
+  registerWebhook(app, hookname||'webhook');
+  listenToWebhook(app, flow, hookname||'webhook');
 
   // up the server
 

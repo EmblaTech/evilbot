@@ -1,7 +1,7 @@
 const handleMessage = require('./__handle_message').ref;
 
-exports.ref = function (app, flow) {
-  app.post('/webhook', function (req, res) {
+exports.ref = function (app, flow, hookname) {
+  app.post('/'+hookname, function (req, res) {
     var data = req.body;
 
     if (data.object === 'page') {
