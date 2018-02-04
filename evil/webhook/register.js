@@ -1,4 +1,4 @@
-exports.ref = function (app, request) {
+exports.ref = function (app) {
   app.get('/webhook', function(req, res) {
     if (req.query['hub.mode'] === 'subscribe' &&
         req.query['hub.verify_token'] === process.env.VERIFY_TOKEN) {

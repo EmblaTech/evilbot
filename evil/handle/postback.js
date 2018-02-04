@@ -1,6 +1,6 @@
 const sendText = require('../util/send/text').send;
 
-const case_get_started = require('./logic/case-get_started');
+// const case_get_started = require('./logic/case-get_started');
 
 exports.handle = function (event) {
   var senderID = event.sender.id;
@@ -21,7 +21,8 @@ exports.handle = function (event) {
     var msg = messageText.toLowerCase();
     // sendText(senderID, `Thanks for saying "${msg}"`);
     if (msg.toLowerCase()==='hi') {
-      case_get_started.handle(senderID);
+      // case_get_started.handle(senderID);
+      //TODO: ^^^
     }
   } else if (payload) {
     if (payload==='CUSTOMER_INTRO') {

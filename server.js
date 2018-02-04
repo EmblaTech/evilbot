@@ -15,11 +15,11 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-const registerWebhook = require('evil/webhook/register').ref;
-const listenToWebhook = require('evil/webhook/listener').ref;
+const registerWebhook = require('./evil/webhook/register').ref;
+const listenToWebhook = require('./evil/webhook/listener').ref;
 
-registerWebhook();
-listenToWebhook();
+registerWebhook(app,);
+listenToWebhook(app,);
 
 // up the server
 

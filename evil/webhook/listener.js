@@ -1,7 +1,7 @@
-const handleMessage = require('../message-handler/text').ref;
-const handlePostback = require('../message-handler/postback').ref;
+const handleMessage = require('../handle/message').ref;
+const handlePostback = require('../handle/postback').ref;
 
-exports.ref = function (app, req) {
+exports.ref = function (app) {
   app.post('/webhook', function (req, res) {
     var data = req.body;
 
