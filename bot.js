@@ -1,6 +1,7 @@
 const evil = require('./evil/startup').ref;
 const send_text = require('./evil/send_text').ref;
 const send_attachment = require('./evil/send_attachment').ref;
+const send_tiles = require('./evil/send_tiles').ref;
 
 const url_banner = 'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2Fsixteen.png?1517748298720';
 
@@ -11,7 +12,24 @@ evil({
     },
     on_message: (x) => { // { 'message', 'sender_id', {meaning}, {event} }
       send_text(x.user_id, 'Got your text');
-      
+      if (x.message=='generic') {
+        send_tiles(x.user_id, [{
+          title: '',
+          subtitle: '',
+          image_url: '',
+          default_action: {
+            type: 'web_url',
+            url: '',
+            messenger_extensions: false,
+            webview_height_ratio: 'COMPACT', // "<COMPACT | TALL | FULL>"
+          },
+          buttons: [{
+            "type": "web_url",
+            "url": "<URL_TO_OPEN_IN_WEBVIEW>",
+            "title": "<BUTTON_TEXT>",
+          }]
+        }]);
+      }
     },
     on_postback: (x) => { // { 'payload', 'sender_id', {event} }
       send_text(x.user_id, 'Got your quick reply');

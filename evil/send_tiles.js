@@ -1,20 +1,5 @@
-const sendToAPI = require('./__send_tile').ref;
+const send_template = require('./__send_template').ref;
 
-exports.ref = function (recipientId, template_type, elements) {
-  var msgData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: template_type,
-          elements: elements,
-        }
-      }
-    }
-  }
-  
-  sendToAPI(msgData);
+exports.ref = function (recipientId, elements) {
+  send_template(recipientId, 'generic', elements);
 }
