@@ -1,8 +1,10 @@
-## Setup Get_started postback payload
+## Setup Get_started postback payload.
+## Expected response: { "result": "success" }
+##   NOTE: 'GET_STARTED' is the default value if not overriden
+##   in the Evil framework's configs object.
 curl -X POST -H "Content-Type: application/json" -d '{
   "get_started": {"payload": "GET_STARTED"}
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>"
-## { "result": "success" }
 
 ## Enable Built-in NLP from Messenger Platform
 ##   NOTE: Wit.ai is not configured in the Evil framework; 
