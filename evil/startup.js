@@ -1,13 +1,24 @@
-exports.ref = function(flow) {
-// static stuff
+exports.ref = function(options) {
+  
+  var flow = options.flow || {};
+  var static_path = static_path || __dirname + '/views/index.html';
+  var port = port || process.env.PORT || 3000;
+      
+  // Express
+  
   var express = require('express');
   var app = express();
+  
+  // static stuff
+  
+  if (static_path)
+  {
+    app.use(express.static('public'));
 
-  app.use(express.static('public'));
-
-  app.get("/", function (request, response) {
-    response.sendFile(__dirname + '/views/index.html');
-  });
+    app.get("/", function (request, response) {
+      response.sendFile(static_path);
+    });
+  }
 
   // dynamic stuff
 
@@ -24,7 +35,8 @@ exports.ref = function(flow) {
 
   // up the server
 
-  var listener = app.listen(process.env.PORT || 3000, function () {
+  var listener = app.listen(port, function () {
     console.log('Your app is listening on port ' + listener.address().port);
   });
+  
 }

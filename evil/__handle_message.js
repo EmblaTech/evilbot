@@ -11,32 +11,37 @@ exports.ref = function (event, flow) {
   
   console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
+  // console.log(JSON.stringify(message));
   
   if (!payload && messageText) {
-    flow.on_message({
-      message: messageText, //text
-      user_id: senderID,
-      _message: message,
-    });
+    if (flow.on_message)
+      flow.on_message({
+        message: messageText, //text
+        user_id: senderID,
+        _message: message,
+      });
+    console.log();
   } else if (payload) {
-    flow.on_payload({
-      payload: payload, //text
-      user_id: senderID,
-      _message: message,
-    });
+    if (flow.on_payload) 
+      flow.on_payload({
+        payload: payload, //text
+        user_id: senderID,
+        _message: message,
+      });
   } else if (messageAttachments) {
-    flow.on_attachment({
-      attachment: {}, // ?
-      user_id: senderID,
-      _message: message,
-    });
+    if (flow.on_attachment)
+      flow.on_attachment({
+        attachment: {}, // ?
+        user_id: senderID,
+        _message: message,
+      });
   } else {
-    flow.on_other({
-      data: {}, // ?
-      user_id: senderID,
-      _message: message,
-    });
+    if (flow.on_other)
+      flow.on_other({
+        data: {}, // ?
+        user_id: senderID,
+        _message: message,
+      });
   }
 
 }

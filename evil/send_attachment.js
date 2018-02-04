@@ -1,4 +1,4 @@
-const sendToAPI = require('./send-to-api').ref;
+const sendToAPI = require('../../__api_send').ref;
 
 exports.ref = function (recipientId, payload) {
   var msgData = {
