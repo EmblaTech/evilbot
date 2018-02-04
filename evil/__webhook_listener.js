@@ -25,6 +25,7 @@ exports.ref = function (app, flow, hookname) {
               handleMessage(event, flow);
             }
           } else if (event.postback) {
+            if ()
             handleMessage(event, flow);
             // TODO: ^^^ check what to do with this
           } else if (event.delivery) {

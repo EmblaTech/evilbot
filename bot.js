@@ -14,4 +14,7 @@ evil({
     },
     on_other: (x) => {}, // { 'sender_id', {_message} }
   },
+  configs: {
+    get_started_payload: 'GET_STARTED',
+  },
 });
