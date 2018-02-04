@@ -2,7 +2,7 @@ const sendText = require('../util/send/text').send;
 
 // const case_get_started = require('./logic/case-get_started');
 
-exports.handle = function (event) {
+exports.handle = function (event, flow) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -23,21 +23,30 @@ exports.handle = function (event) {
     if (msg.toLowerCase()==='hi') {
       // case_get_started.handle(senderID);
       //TODO: ^^^
+      flow.on_message({
+        message: msg,
+        user_id: senderID,
+      });
     }
   } else if (payload) {
-    if (payload==='CUSTOMER_INTRO') {
-      sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
-      sendText(senderID, "Lorem ipsum dolor sit amet. Customer intro.");
-    } else if (payload==='MERCHANT_INTRO') {
-      sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
-      sendText(senderID, "Lorem ipsum dolor sit amet. Merchant intro.");
-    // } else if (payload==='CONFUSED_INTRO') {
-    } 
+    flow.on_payload({
+      payload: payload,
+      user_id: senderID,
+    });
+    // if (payload==='CUSTOMER_INTRO') {
+    //   sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
+    //   sendText(senderID, "Lorem ipsum dolor sit amet. Customer intro.");
+    // } else if (payload==='MERCHANT_INTRO') {
+    //   sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
+    //   sendText(senderID, "Lorem ipsum dolor sit amet. Merchant intro.");
+    // // } else if (payload==='CONFUSED_INTRO') {
+    // } 
     // else if (payload==='CALL_US') {
     //   case_call_us.send(senderID);
     // }
   } else if (messageAttachments) {
-    sendText(senderID, `Thanks for sending that attachment`);
+    // sendText(senderID, `Thanks for sending that attachment`);
+    flow.on_attachment({})
   } else {
     sendText(senderID, `Thanks for doing *that thing*`);
   }
