@@ -4,6 +4,17 @@ exports.ref = function(options) {
   var static_path = static_path || __dirname + '/views/index.html';
   var port = port || process.env.PORT || 3000;
   var hookname = options.hookname;
+  var configs = options.config;
+  
+  // default configs
+  
+  if (!configs) {
+    configs = {};
+  }
+  
+  configs = {
+    get_started_payload: configs.get_started_payload || 'GET_STARTED',
+  };
       
   // Express
   
@@ -32,7 +43,7 @@ exports.ref = function(options) {
   const listenToWebhook = require('./__webhook_listener').ref;
   
   registerWebhook(app, hookname||'webhook');
-  listenToWebhook(app, flow, hookname||'webhook');
+  listenToWebhook(app, flow, hookname||'webhook', configs);
 
   // up the server
 

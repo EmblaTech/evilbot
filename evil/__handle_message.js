@@ -4,10 +4,16 @@ exports.ref = function (event, flow) {
   var timeOfMessage = event.timestamp;
   
   var message = event.message;
+  var postback = event.postback;
   var messageId = message.mid;
   var messageText = message.text;
-  var payload = (message.quick_reply)?message.quick_reply.payload:null;
   var messageAttachments = message.attachments;
+  
+  if (message.quick_reply) {
+    payload = message.quick_reply.payload
+  } else if (postback) {
+    payload = 
+  }
   
   // console.log("Received message for user %d and page %d at %d with message:", 
   //   senderID, recipientID, timeOfMessage);
@@ -22,12 +28,15 @@ exports.ref = function (event, flow) {
       });
     console.log(`- ${senderID}: "${messageText}" @${timeOfMessage}`);
   } else if (payload) {
-    if (flow.on_payload) 
+    if (flow.on_get_started && payload.) {
+    }
+    if (flow.on_payload) {
       flow.on_payload({
         payload: payload, //text
         user_id: senderID,
         _message: message,
       });
+    }
     console.log(`- ${senderID}: payload=${payload} @${timeOfMessage}`);
   } else if (messageAttachments) {
     if (flow.on_attachment)
