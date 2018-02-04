@@ -1,9 +1,17 @@
-exports.ref = function(url, height) {
-  var _height = height.toUpperCase();
+var urlCons = (url, height) => {
+  height = height || 'COMPACT';
+  height = height.toUpperCase();
+
   return {
     type: 'web_url',
-    url: '',
+    url: url,
     messenger_extensions: false,
-    webview_height_ratio: 'COMPACT', // "<COMPACT | TALL | FULL>"
+    webview_height_ratio: height, // "<COMPACT | TALL | FULL>"
   };
 }
+
+exports.ref = {
+  url: urlCons,
+}
+
+exports.url = urlCons;
