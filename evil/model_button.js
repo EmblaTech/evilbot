@@ -16,10 +16,8 @@ var callCons = (title, num) => {return {
   "payload":num,
 }}
 
-exports = {
+exports.ref = {
   url: urlCons,
   postback: postbackCons,
   call: callCons,
-  
-  ref: postbackCons,
 }

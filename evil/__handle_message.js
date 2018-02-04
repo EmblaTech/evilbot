@@ -37,8 +37,8 @@ exports.ref = function (event, flow, config) {
         user_id: senderID,
         event: event,
       });
-    } else if (flow.on_payload) {
-      flow.on_payload({
+    } else if (flow.on_postback) {
+      flow.on_postback({
         payload: payload, //text
         user_id: senderID,
         event: event,
