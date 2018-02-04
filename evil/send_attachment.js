@@ -1,16 +1,17 @@
 const sendToAPI = require('./__api_send').ref;
 
-exports.ref = function (recipientId, payload) {
+exports.ref = function (recipientId, type, payload) {
   var msgData = {
     recipient: {
       id: recipientId
     },
     message: {
       attachment: {
-        payload: payload
+        type: type,
+        payload: payload // { 'url', !!is_reusable }
       }
     }
   }
   
-  sendToAPI.sendToAPI(msgData);
+  sendToAPI(msgData);
 }
