@@ -10,8 +10,8 @@ var urlCons = (url, height) => {
   };
 }
 
-exports.ref = {
+exports = {
   url: urlCons,
+  
+  ref: urlCons,
 }
-
-exports.url = urlCons;

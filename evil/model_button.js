@@ -10,10 +10,16 @@ var postbackCons = (title, id) => {return {
   "payload": id,
 }}
 
-exports.ref = {
+var callCons = (title, num) => {return {
+  "type":"phone_number",
+  "title":title,
+  "payload":num,
+}}
+
+exports = {
   url: urlCons,
   postback: postbackCons,
+  call: callCons,
+  
+  ref: postbackCons,
 }
-
-exports.url = urlCons;
-exports.postback = postbackCons;
