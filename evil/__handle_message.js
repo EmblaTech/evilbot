@@ -14,7 +14,10 @@ exports.ref = function (event, flow, config) {
   
   // console.log("Received message for user %d and page %d at %d with message:", 
   //   senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
+  
+  if (config.log_events) {
+    console.log(JSON.stringify(message));
+  }
   
   if (!payload && messageText) {
     if (flow.on_message)
