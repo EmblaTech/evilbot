@@ -1,27 +1,20 @@
-exports.ref = function (event, flow) {
+exports.ref = function (event, flow, config) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   
-  var message = event.message;
-  var postback = event.postback;
-  var get_started = event.get_started;
+  var message = event.message || {};
+  var quick_reply = message.quick_reply || {};
+  var postback = event.postback || {};
   var messageId = message.mid;
   var messageText = message.text;
   var messageAttachments = message.attachments;
   
-  var payload;
-  if (message.quick_reply) {
-    payload = message.quick_reply.payload
-  } else if (get_started) {
-    payload = {get_started: get_started};
-  } else {
-    payload = postback;
-  }
+  var payload = quick_reply.payload || postback.payload;
   
   // console.log("Received message for user %d and page %d at %d with message:", 
   //   senderID, recipientID, timeOfMessage);
-  // console.log(JSON.stringify(message));
+  console.log(JSON.stringify(message));
   
   if (!payload && messageText) {
     if (flow.on_message)
@@ -32,13 +25,12 @@ exports.ref = function (event, flow) {
       });
     console.log(`- ${senderID}: "${messageText}" @${timeOfMessage}`);
   } else if (payload) {
-    if (flow.on_get_started && payload.get_started) {
+    if (flow.on_get_started && payload==config.get_started_payload) {
       flow.on_get_started({
         user_id: senderID,
         event: event,
       });
-    }
-    if (flow.on_payload) {
+    } else if (flow.on_payload) {
       flow.on_payload({
         payload: payload, //text
         user_id: senderID,

@@ -1,6 +1,6 @@
 const handleMessage = require('./__handle_message').ref;
 
-exports.ref = function (app, flow, hookname) {
+exports.ref = function (app, flow, hookname, configs) {
   app.post('/'+hookname, function (req, res) {
     var data = req.body;
 
@@ -18,14 +18,14 @@ exports.ref = function (app, flow, hookname) {
             if (event.message.is_echo || event.read) {
               console.log(`Reply "${event.message.text}" was READ by the user ${event.sender.id}`);
             } else {
-              handleMessage(event, flow);
+              handleMessage(event, flow, configs);
             }
             
             if (event.message.quick_reply) {
-              handleMessage(event, flow);
+              handleMessage(event, flow, configs);
             }
           } else if (event.postback) {
-            handleMessage(event, flow);
+            handleMessage(event, flow, configs);
           } else if (event.delivery) {
             console.log(`A reply was DELIVERED to the user ${event.sender.id}`);
           } else {
