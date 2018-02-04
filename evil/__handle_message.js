@@ -16,7 +16,7 @@ exports.ref = function (event, flow, config) {
   //   senderID, recipientID, timeOfMessage);
   
   if (config.log_events) {
-    console.log(JSON.stringify(message));
+    console.log('RECEIVED',JSON.stringify(message));
   }
   
   if (!payload && messageText) {

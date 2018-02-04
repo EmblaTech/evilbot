@@ -1,9 +1,9 @@
-var tileCons = (url, height) => {return {
-  title: '',
-  subtitle: '',
-  image_url: '',
-  default_action: UrlAction('https://medium.com/emblatech'),
-  buttons: [PostbackButton('Callback','CALLBACK_1')]
+var tileCons = (title, subtitle, image_url, default_action, buttons) => {return {
+  title: title,
+  subtitle: subtitle,
+  image_url: image_url,
+  default_action: default_action,
+  buttons: buttons,
 }}
 
 exports = {
