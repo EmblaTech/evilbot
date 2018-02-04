@@ -1,4 +1,4 @@
-const sendToAPI = require('../../fb-api/send').ref;
+const sendToAPI = require('../../__api_send').ref;
 
 exports.ref = function (recipientId, messageText) {
   var messageData = {

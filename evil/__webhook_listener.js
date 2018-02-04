@@ -1,4 +1,4 @@
-const handleMessage = require('../handle/message').ref;
+const handleMessage = require('./__handle_message').ref;
 
 exports.ref = function (app, flow) {
   app.post('/webhook', function (req, res) {
