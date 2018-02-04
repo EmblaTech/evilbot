@@ -19,10 +19,11 @@ evil({
       }
     },
     on_postback: (x) => { // { 'payload', 'sender_id', {event} }
-      send_text(x.user_id, 'Got your quick reply');
-      if (x.payload=='CALLBACK_1') {
-        send_text(x.user_id, 'You pushed a button on the tiles, didn\'t you? ^_^');
-      }
+      send_text(x.user_id, 'Got your quick reply', ()=>{
+        if (x.payload=='CALLBACK_1') {
+          send_text(x.user_id, 'You pushed a button on the tiles, didn\'t you? ^_^');
+        }
+      });
     },
     on_attachment: (x) => { // { [attachment], 'sender_id', {event} }
       send_text(x.user_id, 'Got your attachment. Here\'s one of my own:');
