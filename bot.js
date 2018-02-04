@@ -6,8 +6,9 @@ evil({
     on_get_started: (x) => { // { {'user_id', event} }
       send_text(x.user_id, 'Welcome!');
     },
-    on_message: (x) => { // { 'message', 'sender_id', {event} }
+    on_message: (x) => { // { 'message', 'sender_id', {meaning}, {event} }
       send_text(x.user_id, 'Got your text');
+      
     },
     on_postback: (x) => { // { 'payload', 'sender_id', {event} }
       send_text(x.user_id, 'Got your quick reply');

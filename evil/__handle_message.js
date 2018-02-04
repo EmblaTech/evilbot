@@ -21,11 +21,15 @@ exports.ref = function (event, flow, config) {
   
   if (!payload && messageText) {
     if (flow.on_message)
-      flow.on_message({
+      var context = {
         message: messageText, //text
         user_id: senderID,
         event: event,
-      });
+      };
+      if (config.enable_nlp) {
+          context.meaning = message.nlp.entities || {};
+      }
+      flow.on_message(context);
     console.log(`- ${senderID}: "${messageText}" @${timeOfMessage}`);
   } else if (payload) {
     if (flow.on_get_started && payload==config.get_started_payload) {
