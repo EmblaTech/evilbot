@@ -6,4 +6,7 @@ var tileCons = (title, subtitle, image_url, default_action, buttons) => {return 
   buttons: buttons,
 }}
 
+var mediaTileCons = () => {}
+
 exports.tile = tileCons;
+exports.media_tile = mediaTileCons;

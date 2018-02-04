@@ -1,4 +1,4 @@
-const send_tiles = require('./evil/send_tiles').list;
+const send_tiles = require('./evil/send_tiles').media;
 
 const UrlAction = require('./evil/model_action').url;
 const PostbackButton = require('./evil/model_button').postback;

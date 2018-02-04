@@ -1,6 +1,6 @@
 const sendToAPI = require('./__api_send').ref;
 
-exports.ref = function (recipientId, template_type, elements) {
+exports.ref = function (recipientId, template_type, elements, on_success, on_error) {
   var msgData = {
     recipient: {
       id: recipientId
@@ -16,5 +16,5 @@ exports.ref = function (recipientId, template_type, elements) {
     }
   }
   
-  sendToAPI(msgData);
+  sendToAPI(msgData, on_success, on_error);
 }

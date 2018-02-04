@@ -1,7 +1,7 @@
 const request = require('request');
 
 var sendMessage = (messageData, on_success, on_error) => {
-  request({
+  return request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: process.env.PAGE_ACCESS_TOKEN, method: 'POST' },
     method: 'POST',

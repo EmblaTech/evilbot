@@ -13,5 +13,5 @@ exports.ref = function (recipientId, type, payload, on_success, on_error) {
     }
   }
   
-  sendToAPI(msgData, on_success, on_error);
+  return sendToAPI(msgData, on_success, on_error);
 }
