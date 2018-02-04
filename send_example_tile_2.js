@@ -1,4 +1,4 @@
-const send_tiles = require('./evil/send_tiles').generic;
+const send_tiles = require('./evil/send_tiles').list;
 
 const UrlAction = require('./evil/model_action').url;
 const PostbackButton = require('./evil/model_button').postback;
@@ -14,14 +14,20 @@ exports.ref = (x) => {
     url_tile, 
     UrlAction('https://medium.com/emblatech'), 
     [
-      PostbackButton('Custom callback','CALLBACK_1'),
+      PostbackButton('Custom callback 1','CALLBACK_1'),
+      PostbackButton('Custom callback 2','CALLBACK_2'),
+      PostbackButton('Custom callback 3','CALLBACK_3'),
     ]
   );
   
-  send_tiles(x.user_id, [
-    _tile,
-    _tile,
-    _tile,
-  ])
+  send_tiles(x.user_id, 
+       [
+      _tile,
+      _tile,
+      _tile,
+    ], 
+    ()=>{},
+    (x,y,z) => console.log(x,y,z)
+  );
   
 };

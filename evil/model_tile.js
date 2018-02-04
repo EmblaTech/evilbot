@@ -6,6 +6,4 @@ var tileCons = (title, subtitle, image_url, default_action, buttons) => {return 
   buttons: buttons,
 }}
 
-exports.ref = {
-  tile: tileCons,
-}
+exports.tile = tileCons;
