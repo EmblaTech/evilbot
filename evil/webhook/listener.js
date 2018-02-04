@@ -1,7 +1,6 @@
 const handleMessage = require('../handle/message').ref;
-const handlePostback = require('../handle/postback').ref;
 
-exports.ref = function (app) {
+exports.ref = function (app, flow) {
   app.post('/webhook', function (req, res) {
     var data = req.body;
 
@@ -19,17 +18,14 @@ exports.ref = function (app) {
             if (event.message.is_echo || event.read) {
               console.log(`Reply "${event.message.text}" was READ by the user ${event.sender.id}`);
             } else {
-              // console.log(event);
-              handleMessage(event);
+              handleMessage(event, flow);
             }
             
             if (event.message.quick_reply) {
-              handlePostback(event);
+              handleMessage(event, flow);
             }
-          // } else if (event.message.quick_reply) {
-          //   handlePostback(event);
           } else if (event.postback) {
-            handlePostback(event);
+            handleMessage(event, flow);
             // TODO: ^^^ check what to do with this
           } else if (event.delivery) {
             console.log(`A reply was DELIVERED to the user ${event.sender.id}`);

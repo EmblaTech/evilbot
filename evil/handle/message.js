@@ -1,8 +1,4 @@
-const sendText = require('../util/send/text').ref;
-
-// const case_get_started = require('./logic/case-get_started');
-
-exports.ref = function (event) {
+exports.ref = function (event, flow) {
   var senderID = event.sender.id;
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
@@ -18,28 +14,29 @@ exports.ref = function (event) {
   console.log(JSON.stringify(message));
   
   if (!payload && messageText) {
-    var msg = messageText.toLowerCase();
-    // sendText(senderID, `Thanks for saying "${msg}"`);
-    if (msg.toLowerCase()==='hi') {
-      // case_get_started.handle(senderID);
-      //TODO: ^^^
-    }
+    flow.on_message({
+      message: messageText, //text
+      user_id: senderID,
+      _message: message,
+    });
   } else if (payload) {
-    if (payload==='CUSTOMER_INTRO') {
-      sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
-      sendText(senderID, "Lorem ipsum dolor sit amet. Customer intro.");
-    } else if (payload==='MERCHANT_INTRO') {
-      sendText(senderID, "Lorem ipsum dolor sit amet, lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.");
-      sendText(senderID, "Lorem ipsum dolor sit amet. Merchant intro.");
-    // } else if (payload==='CONFUSED_INTRO') {
-    } 
-    // else if (payload==='CALL_US') {
-    //   case_call_us.send(senderID);
-    // }
+    flow.on_payload({
+      payload: payload, //text
+      user_id: senderID,
+      _message: message,
+    });
   } else if (messageAttachments) {
-    sendText(senderID, `Thanks for sending that attachment`);
+    flow.on_attachment({
+      attachment: {}, // ?
+      user_id: senderID,
+      _message: message,
+    });
   } else {
-    sendText(senderID, `Thanks for doing *that thing*`);
+    flow.on_other({
+      data: {}, // ?
+      user_id: senderID,
+      _message: message,
+    });
   }
 
 }
