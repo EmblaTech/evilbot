@@ -2,14 +2,10 @@ const evil = require('./evil/startup').ref;
 
 const send_text = require('./evil/send_text').ref;
 const send_attachment = require('./evil/send_attachment').ref;
-const send_tiles = require('./evil/send_tiles').ref;
 
-const UrlAction = require('./evil/model_action').ref.url;
-const PostbackButton = require('./evil/model_button').ref.postback;
-const Tile = require('./evil/model_tile').ref.tile;
+const example_send_tile = require('./send_example_tile').ref;
 
 const url_banner = 'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2Fsixteen.png?1517748298720';
-const url_tile = 'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2Fbig-images01.jpg?1517751457881';
 
 evil({
   flow: {
@@ -19,21 +15,14 @@ evil({
     on_message: (x) => { // { 'message', 'sender_id', {meaning}, {event} }
       send_text(x.user_id, 'Got your text');
       if (x.message=='generic') {
-        send_tiles(x.user_id, [
-          Tile(
-            'Tile', 
-            'This is a custom tile/template.', 
-            url_tile, 
-            UrlAction('https://medium.com/emblatech'), 
-            [
-              PostbackButton('Callback','CALLBACK_1'),
-            ]
-          ),
-        ]);
+        example_send_tile(x);
       }
     },
     on_postback: (x) => { // { 'payload', 'sender_id', {event} }
       send_text(x.user_id, 'Got your quick reply');
+      if (x.payload=='CALLBACK_1') {
+        send_text(x.user_id, 'You pushed a button on the tiles, didn\'t you? ^_^');
+      }
     },
     on_attachment: (x) => { // { [attachment], 'sender_id', {event} }
       send_text(x.user_id, 'Got your attachment. Here\'s one of my own:');
