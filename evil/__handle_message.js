@@ -9,8 +9,8 @@ exports.ref = function (event, flow) {
   var payload = (message.quick_reply)?message.quick_reply.payload:null;
   var messageAttachments = message.attachments;
   
-  console.log("Received message for user %d and page %d at %d with message:", 
-    senderID, recipientID, timeOfMessage);
+  // console.log("Received message for user %d and page %d at %d with message:", 
+  //   senderID, recipientID, timeOfMessage);
   // console.log(JSON.stringify(message));
   
   if (!payload && messageText) {
@@ -20,7 +20,7 @@ exports.ref = function (event, flow) {
         user_id: senderID,
         _message: message,
       });
-    console.log();
+    console.log(`- ${senderID}: "${messageText}" @${timeOfMessage}`);
   } else if (payload) {
     if (flow.on_payload) 
       flow.on_payload({
@@ -28,6 +28,7 @@ exports.ref = function (event, flow) {
         user_id: senderID,
         _message: message,
       });
+    console.log(`- ${senderID}: payload=${payload} @${timeOfMessage}`);
   } else if (messageAttachments) {
     if (flow.on_attachment)
       flow.on_attachment({
@@ -35,6 +36,7 @@ exports.ref = function (event, flow) {
         user_id: senderID,
         _message: message,
       });
+    console.log(`- ${senderID}: {attachment} @${timeOfMessage}`);
   } else {
     if (flow.on_other)
       flow.on_other({
@@ -42,6 +44,7 @@ exports.ref = function (event, flow) {
         user_id: senderID,
         _message: message,
       });
+    console.log(`- ${senderID}: {unknown} @${timeOfMessage}`);
   }
 
 }
