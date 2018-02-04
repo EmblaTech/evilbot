@@ -6,7 +6,9 @@ var tileCons = (title, subtitle, image_url, default_action, buttons) => {return 
   buttons: buttons,
 }}
 
-var mediaTileCons = () => {}
+var mediaTileCons = (type, page_name, item_numeric_id) => {
+  if (type==) `https://business.facebook.com/${page_name}/videos/${item_numeric_id}`
+}
 
 exports.tile = tileCons;
 exports.media_tile = mediaTileCons;

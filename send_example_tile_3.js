@@ -8,15 +8,10 @@ const url_tile = 'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2F
 
 exports.ref = (x) => {
   
-  var _tile = Tile(
-    'My tile', 
-    'This is a custom tile/template.', 
-    url_tile, 
-    UrlAction('https://medium.com/emblatech'), 
-    [
-      PostbackButton('Custom callback 1','CALLBACK_1'),
-    ]
-  );
+  var _tile = {
+    media_type: 'image', // 'image', 'video'
+    url: 'https://business.facebook.com/<PAGE_NAME>/videos/<NUMERIC_ID>'
+  };
   
   send_tiles(
     x.user_id, 

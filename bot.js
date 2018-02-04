@@ -31,9 +31,14 @@ evil({
     },
     on_attachment: (x) => { // { [attachment], 'sender_id', {event} }
       send_text(x.user_id, 'Got your attachment. Here\'s one of my own:');
-      // send_attachment(x.user_id, 'image', {url: url_banner, is_reusable: true});
-      var {attachmentId} = send_attachment(x.user_id, 'image', {url: url_banner, is_reusable: true});
-      send_text(x.user_id, `Attachment id: ${attachmentId}`);
+      send_attachment(
+        x.user_id, 
+        'image', 
+        {url: url_banner, is_reusable: true}, 
+        (body, resp) => {
+          send_text(x.user_id, `Attachment id: ${body.attachment_id}`);
+        }
+      );
     },
     on_other: (x) => {}, // { 'sender_id', {event} }
   },
