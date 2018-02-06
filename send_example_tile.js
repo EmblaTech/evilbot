@@ -15,6 +15,8 @@ exports.ref = (x) => {
     UrlAction('https://medium.com/emblatech'), 
     [
       PostbackButton('Custom callback','CALLBACK_1'),
+      PostbackButton('Custom callback','CALLBACK_1'),
+      PostbackButton('Custom callback','CALLBACK_1'),
     ]
   );
   

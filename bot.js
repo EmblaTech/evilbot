@@ -20,7 +20,7 @@ evil({
           example_send_tile(x);
         } else if (x.message=='list') {
           example_send_tile_2(x);
-        } else if (x.message=='media') {
+        } else if (x.message.toLowerCase()=='media') {
           example_send_tile_3(x);
         }
       });
