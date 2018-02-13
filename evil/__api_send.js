@@ -2,8 +2,8 @@ const request = require('request');
 
 var sendMessage = (messageData, on_success, on_error) => {
   
-  const subscribers = []
-  const errorHandlers = []
+  // const subscribers = []
+  // const errorHandlers = []
   
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -21,9 +21,9 @@ var sendMessage = (messageData, on_success, on_error) => {
       
       if (on_success) on_success(body, response);
       
-      subscribers.forEach(_ => _(body,response))
-      subscribers = null
-      errorHandlers = null
+      // subscribers.forEach(_ => _(body,response))
+      // subscribers = null
+      // errorHandlers = null
       
     } else {
       console.error("Unable to send message.");
@@ -31,16 +31,16 @@ var sendMessage = (messageData, on_success, on_error) => {
       
       if (on_error) on_error(error, body, response);
     
-      errorHandlers.forEach(_ => _(error, response.statusCode))
-      subscribers = null
-      errorHandlers = null
+      // errorHandlers.forEach(_ => _(error, response.statusCode))
+      // subscribers = null
+      // errorHandlers = null
     }
   });
   
-  return {
-    subscribe: (_) => subscribers.push(_),
-    error: (_) => errorHandlers.push(_)
-  }
+  // return {
+  //   bind: (_) => subscribers.push(_),
+  //   error: (_) => errorHandlers.push(_)
+  // }
 }
 
 exports.ref = sendMessage;
