@@ -36,7 +36,7 @@ module.exports = (_) => {
       action: require('./model_action').refs
     },
     send: {
-      text: require('./send_text'),
+      text: require('./send_text').ref,
       tiles: require('./send_tiles').refs,
       attachment: require('./send_attachment')
     }
