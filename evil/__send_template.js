@@ -1,4 +1,4 @@
-const sendToAPI = require('./__api_send').ref;
+const sendToAPI = require('./__api_send').refObservable;
 
 exports.ref = function (recipientId, template_type, elements, on_success, on_error) {
   var msgData = {
@@ -16,5 +16,5 @@ exports.ref = function (recipientId, template_type, elements, on_success, on_err
     }
   }
   
-  sendToAPI(msgData, on_success, on_error);
+  return sendToAPI(msgData, on_success, on_error);
 }

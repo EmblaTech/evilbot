@@ -1,5 +1,5 @@
 const request = require('request');
-
+const Observable = require('rxjs/Observable').Observable
 
 var sendMessage = (messageData, on_success, on_error) => {
   
@@ -45,3 +45,5 @@ var sendMessage = (messageData, on_success, on_error) => {
 }
 
 exports.ref = sendMessage;
+
+exports.refObservable = Observable.create(sendMessage)

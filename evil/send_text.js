@@ -1,4 +1,4 @@
-const sendToAPI = require('./__api_send').ref;
+const sendToAPI = require('./__api_send').refObservable;
 
 exports.ref = function (recipientId, messageText, on_success, on_error) {
   
@@ -16,7 +16,7 @@ exports.ref = function (recipientId, messageText, on_success, on_error) {
   
   console.log(messageData);
 
-  sendToAPI(messageData, on_success, on_error)
+  return sendToAPI(messageData, on_success, on_error)
     // .bind(...args => {
     //   subscribers.forEach(f => f(...args))
     //   subscribers = null
