@@ -28,7 +28,7 @@ module.exports = (_) => {
   
   const services = _.services || []
   
-  services.forEach(_ => _.inject({
+  services.forEach(_ => _.$ = {
     services: services.filter(service_ref => _ != service_ref),
     factories: {
       button: require('./model_button').refs,
@@ -40,12 +40,12 @@ module.exports = (_) => {
       tiles: require('./send_tiles').refs,
       attachment: require('./send_attachment')
     }
-  }))
+  })
   
   const interactions = _.interactions || []
   
   interactions.forEach(_ => {
-    _.inject({
+    _.$ = {
       listenTo: {
         getStarted: (f) => flowSubscribers.on_get_started.push(f),
         text: (f) => flowSubscribers.on_message.push(f),
@@ -53,7 +53,7 @@ module.exports = (_) => {
         attachment: (f) => flowSubscribers.on_attachment.push(f),
         other: (f) => flowSubscribers.on_other.push(f)
       }
-    })
-    _.init()
+    }
+    _.setup()
   })
 }
