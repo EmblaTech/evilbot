@@ -46,4 +46,15 @@ var sendMessage = (messageData, on_success, on_error) => {
 
 exports.ref = sendMessage;
 
-exports.refObservable = Observable.create(sendMessage)
+exports.refObservable = (messageData) => Observable.create((observer) => {
+  sendMessage(messageData, (...args) => {
+    observer.onNext(...args)
+    observer.onCompleted()
+  }, () => {
+    observer.onError()
+  })
+  
+  return () => {
+    messageData = null
+  } // <-- cleanup stuff goes in here
+})
