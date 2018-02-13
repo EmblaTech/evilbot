@@ -6,9 +6,9 @@
   "name": "evilbot",
   "version": "0.0.1",
   "description": "A Facebook Messenger bot starter project",
-  "main": "bot.js",
+  "main": "bot",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node bot"
   },
   "dependencies": {
     "express": "4.16.2",
