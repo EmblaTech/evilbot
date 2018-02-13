@@ -48,10 +48,10 @@ exports.ref = sendMessage;
 
 exports.refObservable = (messageData) => Observable.create((observer) => {
   sendMessage(messageData, (...args) => {
-    observer.onNext(...args)
-    observer.onCompleted()
-  }, () => {
-    observer.onError()
+    observer.next(...args)
+    observer.complete()
+  }, (...args) => {
+    observer.error(...args)
   })
   
   return () => {

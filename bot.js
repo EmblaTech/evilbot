@@ -2,15 +2,29 @@ const app = require('./evil/core')
 
 const simpleService = {
   send: function(userId, msg) { 
-    this.$.send.text(userId, msg) 
+    return this.$.send.text(userId, msg)
   }
 };
 
 const handleEcho = {
   setup: function(_) { 
     this.$.listenTo.text(x => {
-      simpleService.send(x.userId, x.message)
+      simpleService.send(x.userId, x.message).subscribe(() => {
+        simpleService.send(x.userId, `*${x.message.toUpperCase()}*`).subscribe()
+      })
     })
+  }
+}
+
+const handleHi = {
+  setup: function(_) { 
+    if (_.message==) {
+      this.$.listenTo.text(x => {
+      simpleService.send(x.userId, x.message).subscribe(() => {
+        simpleService.send(x.userId, `*${x.message.toUpperCase()}*`).subscribe()
+      })
+    })
+    }
   }
 }
 
