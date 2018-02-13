@@ -7,30 +7,33 @@ const simpleService = {
 };
 
 const handleEcho = {
-  setup: function(_) { 
-    this.$.listenTo.text(x => {
-      simpleService.send(x.userId, x.message).subscribe(() => {
-        simpleService.send(x.userId, `*${x.message.toUpperCase()}*`).subscribe()
+  setup: function() { 
+    this.$.listenTo.text(_ => {
+      simpleService.send(_.userId, _.message).subscribe(() => {
+        simpleService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
       })
     })
   }
 }
 
 const handleHi = {
-  setup: function(_) { 
-    if (_.message==) {
-      this.$.listenTo.text(x => {
-      simpleService.send(x.userId, x.message).subscribe(() => {
-        simpleService.send(x.userId, `*${x.message.toUpperCase()}*`).subscribe()
-      })
+  setup: function() { 
+    this.$.listenTo.text(_ => {
+      
+      if (_.message.toLowerCase()=='hi') {
+        
+        simpleService.send(_.userId, "Hi!! :-)").subscribe()
+      
+      }
+      
     })
-    }
   }
 }
 
 app({
   interactions: [
     handleEcho,
+    handleHi,
   ],
   services: [
     simpleService,
