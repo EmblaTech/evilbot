@@ -23,7 +23,7 @@ exports.ref = function (event, flow, config) {
     if (flow.on_message)
       var context = {
         message: messageText, //text
-        user_id: senderID,
+        user_id: senderID, userId: senderID,
         event: event,
       };
       if (config.enable_nlp) {
@@ -34,13 +34,13 @@ exports.ref = function (event, flow, config) {
   } else if (payload) {
     if (flow.on_get_started && payload==config.get_started_payload) {
       flow.on_get_started({
-        user_id: senderID,
+        user_id: senderID, userId: senderID,
         event: event,
       });
     } else if (flow.on_postback) {
       flow.on_postback({
         payload: payload, //text
-        user_id: senderID,
+        user_id: senderID, userId: senderID,
         event: event,
       });
     }
@@ -49,14 +49,14 @@ exports.ref = function (event, flow, config) {
     if (flow.on_attachment)
       flow.on_attachment({
         attachment: messageAttachments, // ?
-        user_id: senderID,
+        user_id: senderID, userId: senderID,
         event: event,
       });
     console.log(`- ${senderID}: {attachment} @${timeOfMessage}`);
   } else {
     if (flow.on_other)
       flow.on_other({
-        user_id: senderID,
+        user_id: senderID, userId: senderID,
         event: event,
       });
     console.log(`- ${senderID}: {unknown} @${timeOfMessage}`);

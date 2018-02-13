@@ -1,14 +1,17 @@
-const $ = require('./evil/core')
+const app = require('./evil/core')
 
-const handleHi = {
-  inject: (_) => handleHi.references = _,
-  init: () => {
-    
-  }
-}
+const simpleService = {
+  inject: function(_) { this.$ = _ },
+  send: function(userId, msg) { this.$.send. }
+};
 
-$({
-  interactions: [],
+app({
+  interactions: [{
+    inject: function(_) { this.$ = _ },
+    init: function(_) { this.$.listenTo.text(x => {
+      simpleService.send(x.userId, x.message)
+    })}
+  }],
   services: [],
   configs: {}
 });
