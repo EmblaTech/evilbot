@@ -12,13 +12,13 @@ module.exports = (_) => {
   services.forEach(_ => _({
     services: services.filter(service_ref => _ != service_ref),
     factories: {
-      button: require('./model_button'),
-      tile: require('./model_tile'),
-      action: require('./model_action')
+      button: require('./model_button').refs,
+      tile: require('./model_tile').refs,
+      action: require('./model_action').refs
     },
     send: {
       text: require('./send_text'),
-      tiles: require('./send_tiles'),
+      tiles: require('./send_tiles').refs,
       attachment: require('./send_attachment')
     }
   }))

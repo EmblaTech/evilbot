@@ -20,4 +20,8 @@ exports.url = urlCons;
 exports.postback = postbackCons;
 exports.call = callCons;
 
-exports.r
+exports.refs = {
+  url: urlCons,
+  postback: postbackCons,
+  phone: callCons
+}

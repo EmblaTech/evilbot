@@ -9,3 +9,5 @@ exports.list = (recipientId, elements, on_success, on_error) => {
 exports.media = (recipientId, elements, on_success, on_error) => {
   send_template(recipientId, 'media', elements, on_success, on_error);
 };
+
+exports.refs = exports

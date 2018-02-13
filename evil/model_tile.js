@@ -26,3 +26,8 @@ var mediaTileCons = (media_type, page_name, item_numeric_id, buttons) => {
 
 exports.generic = tileCons;
 exports.media = mediaTileCons;
+
+exports.refs = {
+  generic: tileCons,
+  media: mediaTileCons
+}
