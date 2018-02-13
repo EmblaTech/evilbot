@@ -5,14 +5,20 @@ module.exports = (_) => {
   
   const flowSubscribers = {
     on_get_started: [],
-    on_postback: []
+    on_postback: [],
+    on_message: [],
+    on_attachment: [],
+    on_other: []
   }
-  const bindSubscribers = (idx) => {
-    return (_) => flowSubscribers[idx].forEach(subs => subs(_))
-  }
+  const bindSubscribers = (idx) => 
+    (_) => flowSubscribers[idx].forEach(subs => subs(_))
+  
   const flow = {
-    on_get_started: (_) => flowSubscribers.on_get_started.forEach(subs => subs(_)),
-    on_postback: bindSubscribers('on_postback')
+    on_get_started: (_) => bindSubscribers('on_get_started'),
+    on_postback: bindSubscribers('on_postback'),
+    on_message: bindSubscribers('on_message'),
+    on_attachment: bindSubscribers('on_attachment'),
+    on_other: bindSubscribers('on_other')
   }
   
   startup({
@@ -40,11 +46,11 @@ module.exports = (_) => {
   
   interactions.forEach(_ => _.inject({
     listenTo: {
-      getStarted: (f) => flow.on_get_started.push(f),
-      text: (f) => [].push(f),
-      postback: (f) => [].push(f),
-      attachment: (f) => [].push(f),
-      other: (f) => [].push(f)
+      getStarted: (f) => flowSubscribers.on_get_started.push(f),
+      text: (f) => flowSubscribers.on_message.push(f),
+      postback: (f) => flowSubscribers.on_postback.push(f),
+      attachment: (f) => flowSubscribers.on_attachment.push(f),
+      other: (f) => flowSubscribers.on_other.push(f)
     }
   }))
 }

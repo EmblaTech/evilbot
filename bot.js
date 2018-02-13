@@ -1,7 +1,9 @@
 const $ = require('./evil/core')
 
 $({
-  interactions: [],
+  interactions: [{
+    inject: () => {}
+  }],
   services: [],
   configs: {}
 });
