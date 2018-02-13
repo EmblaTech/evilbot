@@ -19,3 +19,5 @@ var callCons = (title, num) => {return {
 exports.url = urlCons;
 exports.postback = postbackCons;
 exports.call = callCons;
+
+exports.r
