@@ -1,1 +1,1 @@
-import { Module } from './evil/core';
+console.log(1)

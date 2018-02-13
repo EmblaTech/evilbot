@@ -16,7 +16,7 @@
     "request": "2.83.0"
   },
   "engines": {
-    "node": "9.x"
+    "node": "8.x"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/evilbot"
