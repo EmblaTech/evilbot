@@ -22,4 +22,8 @@ module.exports = (_) => {
       attachment: require('./send_attachment')
     }
   }))
+  
+  const interactions = _.interactions || []
+  
+  interactions.forEach(_ => _())
 }
