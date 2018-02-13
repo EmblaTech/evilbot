@@ -9,7 +9,7 @@ module.exports = (_) => {
   
   const services = _.services || []
   
-  services.forEach(_ => _({
+  services.forEach(_ => _.inject({
     services: services.filter(service_ref => _ != service_ref),
     factories: {
       button: require('./model_button').refs,
@@ -25,5 +25,14 @@ module.exports = (_) => {
   
   const interactions = _.interactions || []
   
-  interactions.forEach(_ => _())
+  interactions.forEach(_ => _.inject({
+    listenTo: {
+      getStarted: (f) => [].push(f),
+      text: (f) => [].push(f),
+      quickReply: (f) => [].push(f),
+      postback: (f) => [].push(f),
+      attachment: (f) => [].push(f),
+      other: (f) => [].push(f)
+    }
+  }))
 }
