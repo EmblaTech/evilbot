@@ -1,9 +1,14 @@
 const $ = require('./evil/core')
 
+const handleHi = {
+  inject: (_) => handleHi.references = _,
+  init: () => {
+    
+  }
+}
+
 $({
-  interactions: [{
-    inject: () => {}
-  }],
+  interactions: [],
   services: [],
   configs: {}
 });

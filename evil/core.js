@@ -44,13 +44,16 @@ module.exports = (_) => {
   
   const interactions = _.interactions || []
   
-  interactions.forEach(_ => _.inject({
-    listenTo: {
-      getStarted: (f) => flowSubscribers.on_get_started.push(f),
-      text: (f) => flowSubscribers.on_message.push(f),
-      postback: (f) => flowSubscribers.on_postback.push(f),
-      attachment: (f) => flowSubscribers.on_attachment.push(f),
-      other: (f) => flowSubscribers.on_other.push(f)
-    }
-  }))
+  interactions.forEach(_ => {
+    _.inject({
+      listenTo: {
+        getStarted: (f) => flowSubscribers.on_get_started.push(f),
+        text: (f) => flowSubscribers.on_message.push(f),
+        postback: (f) => flowSubscribers.on_postback.push(f),
+        attachment: (f) => flowSubscribers.on_attachment.push(f),
+        other: (f) => flowSubscribers.on_other.push(f)
+      }
+    })
+    _.init()
+  })
 }
