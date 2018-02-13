@@ -1,5 +1,8 @@
 const startup = require('./startup').ref
 
-exports.serve = startup({
-  configs: { log_events: true }
-})
+module.exports = (_) => {
+  startup({
+    configs: _.configs || {},
+    flow: _.servic
+  })
+}
