@@ -1,6 +1,6 @@
 const app = require('./evil/core')
 
-const sendService = {
+const SendService = {
   send: function(userId, msg) { 
     return this.$.send.text(userId, msg)
   }, 
@@ -9,7 +9,7 @@ const sendService = {
   }
 };
 
-const simpleTileFactory = {
+const SimpleTileFactory = {
   createSimpleTile: function() { 
     return this.$.factories.tile.generic(
       'My tile', 
@@ -30,27 +30,27 @@ const simpleTileFactory = {
   }
 };
 
-const handleEcho = {
+const EchoHandler = {
   setup: function() 
   { 
     this.$.listenTo.text(_ => {
-      sendService.send(_.userId, _.message).subscribe(() => {
-        sendService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
+      SendService.send(_.userId, _.message).subscribe(() => {
+        SendService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
       })
     })
   }
 }
 
-const handleHi = {
+const HiHandler = {
   setup: function() 
   { 
     this.$.listenTo.text(_ => {
       if (_.message.toLowerCase()=='hi') {
-        sendService.send(_.userId, "Hi!! :-)").subscribe(() => {
-          sendService.sendTiles(_.userId, [ 
-            simpleTileFactory.createSimpleTile(), 
-            simpleTileFactory.createSimpleTile(),
-            simpleTileFactory.createSimpleTile(),
+        SendService.send(_.userId, "Hi!! :-)").subscribe(() => {
+          SendService.sendTiles(_.userId, [ 
+            SimpleTileFactory.createSimpleTile(), 
+            SimpleTileFactory.createSimpleTile(),
+            SimpleTileFactory.createSimpleTile(),
           ]).subscribe()
         })
       }
@@ -60,14 +60,14 @@ const handleHi = {
 
 app({
   interactions: [
-    handleEcho,
-    handleHi,
+    EchoHandler,
+    HiHandler
   ],
   services: [
-    sendService,
-    simpleTileFactory,
+    SendService,
+    SimpleTileFactory
   ],
   configs: {
-    enable_nlp: true,
+    enable_nlp: true
   }
 });
