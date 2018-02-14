@@ -4,17 +4,26 @@ const sendService = {
   send: function(userId, msg) { 
     return this.$.send.text(userId, msg)
   }, 
-  sendTile: function(userId, elements) {
-    return this.$.send.list(userId, elements)
+  sendTiles: function(userId, elements) {
+    return this.$.send.tiles.list(userId, elements)
   }
 };
 
 const simpleTileFactory = {
   createSimpleTile: function() { 
-    return this.$.factories.tile.generic('My tile', 'Lorem ipsum dolor sit amet', image_url, default_action, buttons)
+    return this.$.factories.tile.generic(
+      'My tile', 
+      'Lorem ipsum dolor sit amet', 
+      'https://cdn.glitch.com/5655c833-6ba1-4cae-a038-c785bce441e8%2Fsixteen.png?1517748298720', 
+      null, 
+      [ 
+        this.createSimpleButton('Tap me!', 'demo.simpleTile.buttons.1'), 
+        this.createSimpleButton('Tap me!', 'demo.simpleTile.buttons.1'),
+      ]
+    )
   }, 
-  createSimpleButton: function(title, postback) {
-    return this.$.factories.button.postback(title, postback)
+  createSimpleButton: function(title, id) {
+    return this.$.factories.button.postback(title, id)
   }
 };
 
@@ -35,7 +44,10 @@ const handleHi = {
     this.$.listenTo.text(_ => {
       if (_.message.toLowerCase()=='hi') {
         sendService.send(_.userId, "Hi!! :-)").subscribe(() => {
-          // const btn = this.$.
+          sendService.sendTiles(_.userId, [ 
+            simpleTileFactory.createSimpleTile(), 
+            simpleTileFactory.createSimpleTile() 
+          ]).subscribe()
         })
       }
     })
