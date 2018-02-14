@@ -5,7 +5,7 @@ const sendService = {
     return this.$.send.text(userId, msg)
   }, 
   sendTiles: function(userId, elements) {
-    return this.$.send.tiles.g(userId, elements)
+    return this.$.send.tiles.generic(userId, elements)
   }
 };
 
@@ -50,7 +50,8 @@ const handleHi = {
           sendService.sendTiles(_.userId, [ 
             simpleTileFactory.createSimpleTile(), 
             simpleTileFactory.createSimpleTile(),
-          ]).subscribe(() => {}, () => {})
+            simpleTileFactory.createSimpleTile(),
+          ]).subscribe()
         })
       }
     })
@@ -67,7 +68,6 @@ app({
     simpleTileFactory,
   ],
   configs: {
-    log_events: true,
     enable_nlp: true,
   }
 });
