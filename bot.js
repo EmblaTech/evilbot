@@ -1,31 +1,43 @@
 const app = require('./evil/core')
 
-const simpleService = {
+const sendService = {
   send: function(userId, msg) { 
     return this.$.send.text(userId, msg)
+  }, 
+  sendTile: function(userId, elements) {
+    return this.$.send.list(userId, elements)
+  }
+};
+
+const simpleTileFactory = {
+  createSimpleTile: function() { 
+    return this.$.factories.tile.generic('My tile', 'Lorem ipsum dolor sit amet', image_url, default_action, buttons)
+  }, 
+  createSimpleButton: function(title, postback) {
+    return this.$.factories.button.postback(title, postback)
   }
 };
 
 const handleEcho = {
-  setup: function() { 
+  setup: function() 
+  { 
     this.$.listenTo.text(_ => {
-      simpleService.send(_.userId, _.message).subscribe(() => {
-        simpleService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
+      sendService.send(_.userId, _.message).subscribe(() => {
+        sendService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
       })
     })
   }
 }
 
 const handleHi = {
-  setup: function() { 
+  setup: function() 
+  { 
     this.$.listenTo.text(_ => {
-      
       if (_.message.toLowerCase()=='hi') {
-        
-        simpleService.send(_.userId, "Hi!! :-)").subscribe()
-      
+        sendService.send(_.userId, "Hi!! :-)").subscribe(() => {
+          // const btn = this.$.
+        })
       }
-      
     })
   }
 }
@@ -36,7 +48,8 @@ app({
     handleHi,
   ],
   services: [
-    simpleService,
+    sendService,
+    simpleTileFactory,
   ],
   configs: {
     log_events: true,
