@@ -47,7 +47,7 @@ const handleHi = {
           sendService.sendTiles(_.userId, [ 
             simpleTileFactory.createSimpleTile(), 
             simpleTileFactory.createSimpleTile(),
-          ]).subscribe()
+          ]).subscribe((...args) => console.log(...args), (...args) => console.log(...args))
         })
       }
     })

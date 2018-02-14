@@ -33,17 +33,14 @@ var sendMessage = (messageData, on_success, on_error) => {
 exports.ref = sendMessage;
 
 exports.refObservable = (messageData) => Observable.create((observer) => {
-  console.log('observing:', messageData)
   sendMessage(messageData, (...args) => {
     observer.next(...args)
     observer.complete()
-    // console.log('--complete')
   }, (...args) => {
     observer.error(...args)
   })
   
   return () => {
-    // console.log('--teardown')
     messageData = null
   } // <-- cleanup stuff goes in here
 })
