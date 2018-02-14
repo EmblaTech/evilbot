@@ -3,9 +3,6 @@ const Observable = require('rxjs/Observable').Observable
 
 var sendMessage = (messageData, on_success, on_error) => {
   
-  // const subscribers = []
-  // const errorHandlers = []
-  
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: process.env.PAGE_ACCESS_TOKEN, method: 'POST' },
@@ -22,39 +19,31 @@ var sendMessage = (messageData, on_success, on_error) => {
       
       if (on_success) on_success(body, response);
       
-      // subscribers.forEach(_ => _(body,response))
-      // subscribers = null
-      // errorHandlers = null
-      
     } else {
       console.error("Unable to send message.");
       console.error(error, response.statusCode);
       
       if (on_error) on_error(error, body, response);
     
-      // errorHandlers.forEach(_ => _(error, response.statusCode))
-      // subscribers = null
-      // errorHandlers = null
     }
   });
   
-  // return {
-  //   bind: (_) => subscribers.push(_),
-  //   error: (_) => errorHandlers.push(_)
-  // }
 }
 
 exports.ref = sendMessage;
 
 exports.refObservable = (messageData) => Observable.create((observer) => {
+  console.log('observing:', messageData)
   sendMessage(messageData, (...args) => {
     observer.next(...args)
     observer.complete()
+    // console.log('--complete')
   }, (...args) => {
     observer.error(...args)
   })
   
   return () => {
+    // console.log('--teardown')
     messageData = null
   } // <-- cleanup stuff goes in here
 })

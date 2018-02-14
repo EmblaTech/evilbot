@@ -46,7 +46,7 @@ const handleHi = {
         sendService.send(_.userId, "Hi!! :-)").subscribe(() => {
           sendService.sendTiles(_.userId, [ 
             simpleTileFactory.createSimpleTile(), 
-            simpleTileFactory.createSimpleTile() 
+            simpleTileFactory.createSimpleTile(),
           ]).subscribe()
         })
       }
