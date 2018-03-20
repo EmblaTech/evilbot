@@ -1,15 +1,32 @@
 const app = require('./evil/core')
 
-const SendService = {
-  send: function (userId, msg) { 
-    return this.$.send.text(userId, msg)
+const SimpleTileFactory = require('./tile-factory');
+const SendService = require('./send-service');
+
+const EchoHandler = {
+  setup: function() 
+  { 
+    this.$.listenTo.text(_ => {
+      SendService.send(_.userId, _.message).subscribe(() => {
+        SendService.send(_.userId, `*${_.message.toUpperCase()}*`).subscribe()
+      })
+    })
   }
 }
 
-const EchoHandler = {
-  setup: function () { 
+const HiHandler = {
+  setup: function() 
+  { 
     this.$.listenTo.text(_ => {
-      SendService.send(_.userId, _.message).subscribe()
+      if (_.message.toLowerCase()=='hi') {
+        SendService.send(_.userId, "Hi!! :-)").subscribe(() => {
+          SendService.sendTiles(_.userId, [ 
+            SimpleTileFactory.createSimpleTile(), 
+            SimpleTileFactory.createSimpleTile(),
+            SimpleTileFactory.createSimpleTile(),
+          ]).subscribe()
+        })
+      }
     })
   }
 }
@@ -17,8 +34,13 @@ const EchoHandler = {
 app({
   interactions: [
     EchoHandler,
+    HiHandler
   ],
   services: [
     SendService,
-  ]
-})
+    SimpleTileFactory
+  ],
+  configs: {
+    enable_nlp: true
+  }
+});
