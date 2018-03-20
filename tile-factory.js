@@ -6,7 +6,7 @@ const createSimpleTile = function() {
     this.createSimpleAction(),
     [ 
       this.createSimpleButton('Tap me!', 'demo.simpleTile.buttons.1'), 
-      this.createSimpleButton('Tap me!', 'demo.simpleTile.buttons.1'),
+      this.createSimpleButton('Tap me!', 'demo.simpleTile.buttons.2'),
     ]
   )
 };

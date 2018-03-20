@@ -1,15 +1,7 @@
 const app = require('./evil/core')
 
 const SimpleTileFactory = require('./tile-factory');
-
-const SendService = {
-  send: function(userId, msg) { 
-    return this.$.send.text(userId, msg)
-  }, 
-  sendTiles: function(userId, elements) {
-    return this.$.send.tiles.generic(userId, elements)
-  }
-};
+const SendService = require('./send-service');
 
 const EchoHandler = {
   setup: function() 
